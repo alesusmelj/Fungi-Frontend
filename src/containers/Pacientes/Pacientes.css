@@ -1,0 +1,118 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    background-color: #f0f0f0;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.question-input {
+    display: flex;
+    align-items: center;
+}
+
+.question-input2 {
+    flex-grow: 1;
+    font-size: 14px;
+    border: none;
+    padding: 5px;
+}
+
+.questions-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.question-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.Formulario input, .Formulario button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.remove-answer-btn, .add-answer-btn {
+    border: none;
+    background-color: transparent;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-answer-btn:hover, .add-answer-btn:hover {
+    background-color: #f00;
+    color: #fff;
+}
+
+.add-answer-btn:hover {
+    background-color: rgb(79, 207, 43);
+    color: #fff;
+}
+
+.answer-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+   }
+   
+   .modal-content {
+    background-color: #fefefe;
+    margin: 0;
+    padding: 0px;
+    border: 1px solid #888;
+    width: 100%;
+   }
+@media screen and (max-width: 768px) {
+    .question-input2, .add-answer-btn, .remove-answer-btn {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .question-input2, .add-answer-btn, .remove-answer-btn {
+        padding: 20px;
+    }
+}

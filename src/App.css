@@ -1,0 +1,46 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto; 
+    background-color: black;
+}
+
+
+.Formulario {
+    width: 50%; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container2{
+    display: flex;
+    height: 100vh;
+}
+
+
+.Formulario input, .Formulario button {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+
+@media screen  {
+    .Formulario input, .Formulario button {
+        padding: 15px; 
+    }
+}
+
+@media screen  {
+    .Formulario input, .Formulario button {
+        padding: 20px; 
+    }
+}
