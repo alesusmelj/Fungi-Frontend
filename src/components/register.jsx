@@ -11,32 +11,46 @@ const Register = () => {
         birthDate: '',
         email: '',
         idCard: '',
+        password: 'gsgsggdh'
     };
 
     const validationSchema = Yup.object({
+        password: Yup.string().required('El password es requerido'),
         firstName: Yup.string().required('El nombre es requerido'),
         lastName: Yup.string().required('El apellido es requerido'),
         phoneNumber: Yup.string()
                         .required('El número de celular es requerido')
-                        .test('startsWith549', 'El número de celular debe comenzar con +549', (value) => {
-                            return value.startsWith('+549');
-                        }),
+                        ,
         birthDate: Yup.date().required('La fecha de nacimiento es requerida'),
         email: Yup.string().email('Correo electrónico inválido').required('El correo electrónico es requerido'),
         idCard: Yup.number().required('El DNI es requerido'),
     });
 
     const formik = useFormik({
+     
+
+
         initialValues,
         validationSchema,
-        onSubmit: async (values) => {
+        onSubmit: async () => {
+            const pas = {
+                firstName: initialValues.firstName,
+                lastName: initialValues.lastName,
+                phoneNumber: initialValues.phoneNumber,
+                birthDate: initialValues.birthDate,
+                email: initialValues.email,
+                idCard: initialValues.idCard,
+                password: 'gsgsggdh'
+            };
+    
             try {
+               
                 const response = await fetch('http://localhost:8080/landing-page/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(values),
+                    body: JSON.stringify(pas),
                 });
 
                 if (!response.ok) {
@@ -52,14 +66,20 @@ const Register = () => {
     });
 
     const handlePhoneNumberChange = (event) => {
-      let value = event.target.value;
+        let value = event.target.value;
+       
+        
+        const phoneNumberAsInteger = parseInt(value, 10);
       
-      if (value.startsWith('+549')) {
-          value = value.substring(4); 
-      }
-     
-      formik.setFieldValue('phoneNumber', '+549' + value);
-  };
+        if (!isNaN(phoneNumberAsInteger)) {
+          
+           formik.setFieldValue('phoneNumber', phoneNumberAsInteger);
+        } else {
+          
+           formik.setFieldValue('phoneNumber', '');
+        }
+       };
+       
   
 
     return (

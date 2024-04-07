@@ -10,7 +10,6 @@ const Home = () => {
         <AppHeader />
         <Box sx={styles.container}>
             <SidenNav />    
-            <Typography sx={styles.pageTitle} variant='h5'> Pacientes Dashboard</Typography>
             <Box sx={styles.columnContainer}>
                 <LatestPatientCard sx={styles.item}/>
                 <Card sx={styles.item}>
