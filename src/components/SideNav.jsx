@@ -22,8 +22,8 @@ function SidenNav(){
         >
             <Box sx={styles.avatarContainer}>
                 <Avatar sx={styles.avatar} alt='Nombre de canal' src='src/assets/avatars/perfil.jpg'></Avatar>
-                {!collapsed ? <Typography variant="body2" sx={styles.yourChannel}>Doctor  PORONGA GRANDE</Typography> : null}
-                {!collapsed ?<Typography variant="overline"> Franco Feresini</Typography> : null}
+                {!collapsed ? <Typography variant="body2" sx={styles.yourChannel}>Doctora</Typography> : null}
+                {!collapsed ?<Typography variant="overline"> Mariela Feresini</Typography> : null}
             </Box>
             <Menu 
                 menuItemStyles={{

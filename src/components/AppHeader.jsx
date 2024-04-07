@@ -19,17 +19,6 @@ function AppHeader() {
                     sx={styles.appLogo}
                     src='/src/assets/logo.png' />
                 <Box sx={{flexGrow: 1}} />
-                <IconButton title= 'Notificaciones' color= 'secondary'>
-                    <Badge badgeContent={14} color="error">
-                        <NotificationsTwoToneIcon />
-                    </Badge>
-                </IconButton>
-                <IconButton tittle = 'Configuración' color ='secondary'>
-                    <TuneTwoToneIcon />
-                </IconButton>
-                <IconButton tittle = 'Cerrar Sesión' color ='secondary'>
-                    <LogoutTwoToneIcon />
-                </IconButton>
             </Toolbar>
         </AppBar>
     );
