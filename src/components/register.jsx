@@ -11,7 +11,8 @@ const Register = () => {
         idCard: '',
         phoneNumber: '',
         birthDate: '',
-        doctorId: 1 // Hardcodeado como 1
+        doctorId: 1, // Hardcodeado como 1
+        password: "SecurePassword123",
     };
 
     const formik = useFormik({
@@ -37,15 +38,7 @@ const Register = () => {
         },
     });
 
-    const handlePhoneNumberChange = (event) => {
-      let value = event.target.value;
-      
-      if (value.startsWith('+549')) {
-          value = value.substring(4); 
-      }
-     
-      formik.setFieldValue('phoneNumber', '+549' + value);
-    };
+   
 
     return (
         <section className={styles.container}>
@@ -76,7 +69,7 @@ const Register = () => {
                             type="text" // Cambiado a text para manejar el prefijo
                             name="phoneNumber"
                             value={formik.values.phoneNumber}
-                            onChange={handlePhoneNumberChange} // Usando el manejo personalizado
+                            onChange={formik.handleChange} // Usando el manejo personalizado
                         />
                     </div>
                     <div className={styles['input-box']}>

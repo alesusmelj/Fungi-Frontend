@@ -6,7 +6,6 @@ function LatestPatientCard(props){
             <Typography variant='cardTitle'> Informes </Typography>
             <Box sx={styles.latestPatientContainer}>
                 <Box sx={styles.latestPatientTop} component={'img'} src='src/assets/Top.png'/>
-                <Typography  sx={styles.latestPatientTitle} > Ultimo informe hace 13 minutos </Typography>
             </Box>
             <Typography variant='h7' sx={styles.latestPatientSubTitle}> Últimas 24hs: </Typography>
             <Box sx={styles.latestPatientStats}> 

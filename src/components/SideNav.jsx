@@ -27,7 +27,7 @@ function SidenNav() {
         >
             <Box sx={styles.avatarContainer}>
                 <Avatar sx={styles.avatar} alt='Nombre de canal' src='src/assets/avatars/perfil.jpg'></Avatar>
-                {!collapsed ? <Typography variant="body2" sx={styles.yourChannel}>{doctor ? `${doctor.name} ${doctor.surname}` : 'Doctor Polla'}</Typography> : null}
+                {!collapsed ? <Typography variant="body2" sx={styles.yourChannel}>{doctor ? `${doctor.name} ${doctor.surname}` : 'Dr.'}</Typography> : null}
                 {!collapsed ? <Typography variant="overline">{doctor ? doctor.specialty : 'Franco Feresini'}</Typography> : null}
             </Box>
             <Menu
