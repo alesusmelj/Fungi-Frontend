@@ -38,7 +38,7 @@ const styles = {
   container:{
     display: 'flex',
     bgcolor: 'neutral.light',
-    height: 'calc(100% -64px)'
+    height: '100vh'
   },
   mainSection: {
     p: 1,

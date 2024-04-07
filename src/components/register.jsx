@@ -13,17 +13,20 @@ const Register = () => {
         birthDate: '',
         doctorId: 1 // Hardcodeado como 1
     };
-
     const formik = useFormik({
+     
+
+
         initialValues,
         onSubmit: async (values) => {
             try {
+               
                 const response = await fetch('http://localhost:8080/landing-page/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(values),
+                    body: JSON.stringify(pas),
                 });
 
                 if (!response.ok) {
@@ -38,7 +41,10 @@ const Register = () => {
     });
 
     const handlePhoneNumberChange = (event) => {
-      let value = event.target.value;
+        let value = event.target.value;
+       
+        
+        const phoneNumberAsInteger = parseInt(value, 10);
       
       if (value.startsWith('+549')) {
           value = value.substring(4); 

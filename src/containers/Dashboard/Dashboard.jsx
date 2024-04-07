@@ -3,6 +3,8 @@ import SidenNav from '../../components/SideNav';
 import AppHeader from '../../components/AppHeader';
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
 import LatestPatientCard from '../../components/LatestPatientCard';
+import { LineChart } from '@mui/x-charts/LineChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const Home = () => {
   return (
@@ -10,12 +12,11 @@ const Home = () => {
         <AppHeader />
         <Box sx={styles.container}>
             <SidenNav />    
-            <Typography sx={styles.pageTitle} variant='h5'> Pacientes Dashboard</Typography>
             <Box sx={styles.columnContainer}>
                 <LatestPatientCard sx={styles.item}/>
                 <Card sx={styles.item}>
                     <CardContent>
-                        <Typography variant='cardTitle'> Situación Urgente </Typography>
+                        <Typography variant='cardTitle'> Situaciónes Urgentes </Typography>
                         <Box sx={styles.postTitleSection}>
                             <Avatar sx={styles.avatar} src="src/assets/emergencia.png"></Avatar>
                             <Typography sx={styles.postMeta}> Registrados en las ultimas </Typography>
@@ -25,7 +26,41 @@ const Home = () => {
                         <Box sx={styles.urgFcst}>
                             <Typography sx={styles.urgFcstValue}>+2%</Typography>
                             <Typography sx={styles.urgFcstDescription}> vs promedio mensual</Typography>
+                        </Box>                        
+                    </CardContent>
+                </Card>
+                <Card sx={styles.item}>
+                    <CardContent>
+                        <Typography variant='cardTitle'> Llamadas de emergencia </Typography>
+                        <Box sx={styles.postTitleSection}>
+                            <Avatar sx={styles.avatar} src="src/assets/llamada.png"></Avatar>
+                            <Typography sx={styles.postMeta}> Registrados en las ultimas </Typography>
+                            <Typography sx={styles.postMeta}> 24hs</Typography>
                         </Box>
+                        <Typography sx={styles.urgPercentaje}> 17% </Typography>
+                        <Box sx={styles.urgFcst}>
+                            <Typography sx={styles.urgFcstValue}>-5%</Typography>
+                            <Typography sx={styles.urgFcstDescription}> vs promedio mensual</Typography>
+                        </Box>                        
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardContent>
+                    <BarChart
+                        width={350}
+                        height={500}
+                        series={[
+                            { data: [2, 4, 6, 0], label: 'Críticas', id: 'pvId', stack: 'total' },
+                            { data: [5, 10, 15, 3], label: 'Normal', id: 'uvId', stack: 'total' },
+                        ]}
+                        xAxis={[{ data: [
+                            'Fratesi',
+                            'Gaglia',
+                            'Cort',
+                            'Moraga',
+
+                          ], scaleType: 'band' }]}
+                        />
                     </CardContent>
                 </Card>
             </Box>
@@ -74,9 +109,13 @@ const styles = {
       margin: 'auto'
   },
   urgFcst: {
-      display: 'block', 
-      textAlign: 'center',
-      margin: 'auto', 
+    display: 'flex', 
+    textAlign: 'center',
+    margin: 'auto',     
+    justifyContent: 'center', // Alinea los elementos hijos horizontalmente en el centro
+    alignItems: 'center', // Alinea los elementos hijos verticalmente en el centro
+    flexWrap: 'wrap', // 
+    gap: '05px'
   },
   
   urgFcstValue: {
@@ -84,7 +123,7 @@ const styles = {
   },
   
   urgFcstDescription: {
-      fontSize: '0.8rem', 
+      fontSize: '0.9rem', 
   },
 }
    
