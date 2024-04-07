@@ -1,0 +1,85 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ 
+ .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  height: 80%;
+  border-radius: 30px;
+  background: #f1f1f1;
+  box-shadow: 15px 15px 30px #bebebe,
+                -15px -15px 30px #ffffff;
+ }
+ 
+ .chat {
+  background-color: white;
+  margin-bottom: 10px;
+  width: 95%;
+  height: 85%;
+  border-radius: 0px 0px 30px 30px;
+  overflow-y: auto; /* Permite el desplazamiento vertical si es necesario */
+  overflow-x: hidden; /* Oculta el desplazamiento horizontal */
+ }
+ 
+ .blob {
+  margin-left: 10px;
+  margin-top: 8px;
+  width: 92%; /* Asegura que el blob se ajuste al ancho del chat */
+ }
+ 
+ .messages {
+  background-color: rgb(19, 44, 184);
+  border-radius: 0px 36px 36px 36px;
+  display: flex;
+  width: 100%; /* Asegura que el mensaje se ajuste al ancho del blob */
+  justify-content: start;
+  align-items: end;
+  color: white;
+  padding: 10px;
+ }
+
+
+ 
+ .messages p {
+  margin-left: 2px;
+ }
+ 
+ .options {
+  margin-top: 10px;
+  background-color: rgb(40, 81, 177);
+  border: 2px rgb(0, 0, 151) solid;
+  width: 100%; /* Asegura que las opciones se ajusten al ancho del blob */
+  height: 40%;
+  border-radius: 36px 36px 36px 36px;
+  display: flex;
+  justify-content: space-around;
+
+  padding: 10px;
+ }
+ 
+ .option {
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px; /* Añade margen entre las opciones */
+ }
+ 
+ .option:hover {
+  background-color: #f0f0f0;
+ }
+ 
+ .option.selected {
+  background-color: #007bff;
+  color: white;
+ }
+
+

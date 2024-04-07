@@ -1,0 +1,143 @@
+$color-bg: #52BBF0;
+$color-text: lighten($color-bg, 40%);
+$color-timer-bg: lighten($color-bg, 10%);
+$color-highlight: #3F6FB8;
+
+$timer-duration:4000ms;
+$timer-count:8;
+$message-count:4;
+
+
+
+.wrapper{
+  transform:translate(-50%,-50%);
+  top:50%;
+  left:50%;
+  width:40vh;
+  height:40vh;
+  position:absolute;
+  margin:auto;
+
+}
+
+.directions{
+  position:absolute;
+  top:50%;left:50%;
+  text-align:center;
+  transform:translate(-50%,-50%);
+  font-size:2rem;
+  .message{
+    padding:.25rem;
+    animation: text-highlight ($timer-duration * $message-count) infinite;
+    color:$color-text;
+    opacity:.3;
+    &:nth-child(2){
+      animation-delay:$timer-duration;
+    }
+    &:nth-child(3){
+      animation-delay:$timer-duration * 2;
+    }
+    &:nth-child(4){
+      animation-delay:$timer-duration * 3;
+    }
+  }
+
+
+}
+
+.timer{
+  position:relative;
+  overflow:hidden;
+  border-radius:.5rem;
+  height:10%;
+  background:$color-timer-bg;
+
+  &:after{
+    content:'';
+    display:block;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    transform: translateX(-100%);   
+    animation: timer ($timer-duration * $timer-count) linear infinite;
+    animation-fill-mode: forwards;
+    background:$color-highlight;
+    z-index:0;
+  }
+  &.inhale{
+    left:10%;
+    width:80%;
+        transform: rotate(0);
+  }
+  &.inhale-hold{
+    position:absolute;
+    width:80%;
+    right:10%;
+    bottom:10%;
+    transform: rotate(90deg);
+    transform-origin:bottom right;
+    &:after{
+      animation-delay:$timer-duration;
+    }
+  }
+  &.exhale{
+    position:absolute;
+    width:80%;
+    left:10%;
+    bottom:0;
+    transform: rotate(180deg);
+    &:after{
+      animation-delay:$timer-duration*2;
+    }
+  } 
+  &.exhale-hold{
+    position:absolute;
+    width:80%;
+    left:10%;
+    bottom:10%;
+    transform: rotate(270deg);
+    transform-origin:bottom left;    
+    &:after{
+      animation-delay:$timer-duration*3;
+    }
+  } 
+
+  .indicators{
+    display:flex;
+    height:100%;
+  }
+  .indicator{
+    text-align:center;
+    position:relative;
+    z-index:2;
+    display:block;
+    flex:1;
+    border:1px solid $color-bg;
+    box-sizing:border-box;
+  }
+}
+
+@keyframes timer{
+  10%,50%{
+    transform: translateX(0%);    
+  }
+  60%,100%{
+    transform: translateX(100%);    
+  }
+}
+
+@keyframes text-highlight{
+  2%,25%{
+    color:rgb(45, 43, 155);
+    opacity:1;
+    font-weight:600;
+  }
+  28%,100%{
+    color: $color-text;
+    opacity:.3;
+  }
+}
+
