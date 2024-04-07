@@ -35,8 +35,19 @@ const Login = () => {
         }
 
         const loginData = await response.json();
+
+        // Almacenar la información de inicio de sesión en sessionStorage
         sessionStorage.setItem('loginData', JSON.stringify(loginData));
-        navigate('/home');
+
+        // Redirigir basado en el rol del usuario
+        if (loginData.role === 'ADMIN') {
+          navigate('/pacientes');
+        } else if (loginData.role === 'USER') {
+          navigate('/bot');
+        } else {
+          // Manejar otros roles o errores
+          console.error('Rol de usuario no reconocido');
+        }
       } catch (error) {
         console.error(error);
         // Aquí puedes manejar los errores, por ejemplo, mostrando un mensaje al usuario

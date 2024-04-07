@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Select, MenuItem } from '@mui/material';
 import './formulario.css';
 import SidenNav from '../../components/SideNav';
@@ -9,6 +9,24 @@ function Formularios() {
         { question: '', answers: [] }
     ]);
     const [selectedOption, setSelectedOption] = useState('');
+    const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+        const fetchPatients = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/medic/get-patients?doctorId=1');
+                if (!response.ok) {
+                    throw new Error('Error al obtener los pacientes');
+                }
+                const data = await response.json();
+                setPatients(data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchPatients();
+    }, []);
 
     const addQuestion = () => {
         setQuestions([...questions, { question: '', answers: [] }]);
@@ -49,10 +67,15 @@ function Formularios() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Include selectedOption in the form data
+        const qars = questions.map(question => ({
+            question: question.question,
+            possibleAnswers: question.answers
+        }));
+
         const formData = {
-            questions,
-            selectedPatient: selectedOption, // Include the selected patient's ID
+            qars,
+            doctorId: 1,
+            patientId: selectedOption
         };
 
         try {
@@ -61,7 +84,6 @@ function Formularios() {
                 body: JSON.stringify(formData),
                 headers: {
                     'Content-Type': 'application/json',
-                    
                 },
             });
 
@@ -71,10 +93,11 @@ function Formularios() {
 
             const data = await response.json();
             console.log(data);
-            // Handle success, e.g., show a success message or redirect the user
+            window.location.reload();
+
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);
-            // Handle error, e.g., show an error message
+           
         }
     };
 
@@ -94,11 +117,13 @@ function Formularios() {
                                 inputProps={{ 'aria-label': 'Without label' }}
                             >
                                 <MenuItem value="" disabled>
-                                    <em>Selecciona una paciente</em>
+                                    <em>Selecciona un paciente</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Paciente 1</MenuItem>
-                                <MenuItem value={20}>Paciente 2</MenuItem>
-                                <MenuItem value={30}>Paciente 3</MenuItem>
+                                {patients.map(patient => (
+                                    <MenuItem key={patient.id} value={patient.id}>
+                                        {patient.name} {patient.surname}
+                                    </MenuItem>
+                                ))}
                             </Select>
                             <button type="submit">Enviar</button>
                         </div>

@@ -1,48 +1,24 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import styles from './register.module.css';
 
 const Register = () => {
     const initialValues = {
-        firstName: '',
-        lastName: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        idCard: '',
         phoneNumber: '',
         birthDate: '',
-        email: '',
-        idCard: '',
-        password: 'gsgsggdh'
+        doctorId: 1 // Hardcodeado como 1
     };
-
-    const validationSchema = Yup.object({
-        password: Yup.string().required('El password es requerido'),
-        firstName: Yup.string().required('El nombre es requerido'),
-        lastName: Yup.string().required('El apellido es requerido'),
-        phoneNumber: Yup.string()
-                        .required('El número de celular es requerido')
-                        ,
-        birthDate: Yup.date().required('La fecha de nacimiento es requerida'),
-        email: Yup.string().email('Correo electrónico inválido').required('El correo electrónico es requerido'),
-        idCard: Yup.number().required('El DNI es requerido'),
-    });
-
     const formik = useFormik({
      
 
 
         initialValues,
-        validationSchema,
-        onSubmit: async () => {
-            const pas = {
-                firstName: initialValues.firstName,
-                lastName: initialValues.lastName,
-                phoneNumber: initialValues.phoneNumber,
-                birthDate: initialValues.birthDate,
-                email: initialValues.email,
-                idCard: initialValues.idCard,
-                password: 'gsgsggdh'
-            };
-    
+        onSubmit: async (values) => {
             try {
                
                 const response = await fetch('http://localhost:8080/landing-page/register', {
@@ -57,11 +33,10 @@ const Register = () => {
                     throw new Error('Error al registrar');
                 }
 
-                
                 window.location.reload();
             } catch (error) {
                 console.error(error);
-                }
+            }
         },
     });
 
@@ -71,16 +46,12 @@ const Register = () => {
         
         const phoneNumberAsInteger = parseInt(value, 10);
       
-        if (!isNaN(phoneNumberAsInteger)) {
-          
-           formik.setFieldValue('phoneNumber', phoneNumberAsInteger);
-        } else {
-          
-           formik.setFieldValue('phoneNumber', '');
-        }
-       };
-       
-  
+      if (value.startsWith('+549')) {
+          value = value.substring(4); 
+      }
+     
+      formik.setFieldValue('phoneNumber', '+549' + value);
+    };
 
     return (
         <section className={styles.container}>
@@ -90,35 +61,29 @@ const Register = () => {
                     <label>Nombre</label>
                     <input
                         type="text"
-                        name="firstName"
-                        value={formik.values.firstName}
+                        name="firstname"
+                        value={formik.values.firstname}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
                     />
-                    {formik.touched.firstName && formik.errors.firstName ? <p>{formik.errors.firstName}</p> : null}
                 </div>
                 <div className={styles['input-box']}>
                     <label>Apellido</label>
                     <input
                         type="text"
-                        name="lastName"
-                        value={formik.values.lastName}
+                        name="lastname"
+                        value={formik.values.lastname}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
                     />
-                    {formik.touched.lastName && formik.errors.lastName ? <p>{formik.errors.lastName}</p> : null}
                 </div>
                 <div className={styles.column}>
                     <div className={styles['input-box']}>
                         <label>Numero de celular</label>
                         <input
-                            type="text"
+                            type="text" // Cambiado a text para manejar el prefijo
                             name="phoneNumber"
                             value={formik.values.phoneNumber}
-                            onChange={handlePhoneNumberChange}
-                            onBlur={formik.handleBlur}
+                            onChange={handlePhoneNumberChange} // Usando el manejo personalizado
                         />
-                        {formik.touched.phoneNumber && formik.errors.phoneNumber ? <p>{formik.errors.phoneNumber}</p> : null}
                     </div>
                     <div className={styles['input-box']}>
                         <label>Fecha de nacimiento</label>
@@ -127,9 +92,7 @@ const Register = () => {
                             name="birthDate"
                             value={formik.values.birthDate}
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
                         />
-                        {formik.touched.birthDate && formik.errors.birthDate ? <p>{formik.errors.birthDate}</p> : null}
                     </div>
                 </div>
                 <div className={styles['input-box'] + ' ' + styles.address}>
@@ -139,9 +102,7 @@ const Register = () => {
                         name="email"
                         value={formik.values.email}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
                     />
-                    {formik.touched.email && formik.errors.email ? <p>{formik.errors.email}</p> : null}
                     <label>DNI</label>
                     <div className={styles.column}>
                         <input
@@ -149,9 +110,7 @@ const Register = () => {
                             name="idCard"
                             value={formik.values.idCard}
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
                         />
-                        {formik.touched.idCard && formik.errors.idCard ? <p>{formik.errors.idCard}</p> : null}
                     </div>
                 </div>
                 <button type="submit">Registrar</button>
